@@ -21,10 +21,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
+
     "package": "react-scripts build && electron-forge package",
     "make": "react-scripts build && electron-forge make",
     "make-win": "react-scripts build && npx @electron-forge/cli make",
     "electron": "wait-on tcp:3000 && electron-forge start"  
+
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +47,7 @@
     ]
   },
   "devDependencies": {
+
     "@electron-forge/cli": "^6.0.0-beta.63",
     "@electron-forge/maker-deb": "^6.0.0-beta.63",
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
@@ -86,5 +89,6 @@
         }
       ]
     }
+
   }
 }
