@@ -10,6 +10,8 @@
 
 # production
 /build
+/out
+/FFCatalogued-darwin-x64
 
 # misc
 .DS_Store
