@@ -3,27 +3,47 @@ const path = require('path');
 const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
 
+
 function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
+    const win = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+        nodeIntegration: true,
+        },
+    });
 
-  win.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
-  );
-  
-  if (isDev) {
-    win.webContents.openDevTools({ mode: 'detach' });
-  }
-}
+    win.loadURL(
+        isDev
+        ? 'http://localhost:3000'
+        : `file://${path.join(__dirname, '../build/index.html')}`
+    );
 
-app.whenReady().then(createWindow);
+    if (isDev) {
+        const devTools = require("electron-devtools-installer");
+        installExtension = devTools.default;
+        REACT_DEVELOPER_TOOLS = devTools.REACT_DEVELOPER_TOOLS;
+
+        win.webContents.openDevTools({ mode: 'detach' });
+
+    };
+
+    if(require("electron-squirrel-startup")) {
+        app.quit();
+    };
+
+};
+
+//app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+    createWindow();
+
+    if(isDev) {
+        installExtension(devTools.REACT_DEVELOPER_TOOLS)
+        .then(name => console.log(`Added Extension:  ${name}`))
+        .catch(error => console.log(`An error occurred: , ${error}`));
+    };
+});
 
 
 
